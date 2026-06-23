@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste de persistência</title>
 </head>
-<body>
+<body class="container p-5">
+    <main>
+        <h1>Salvando Nome com JSON</h1>
+        <div class ="container">
     <form>
-        <label for="texto-inserido">Coloque seu nome:</label>
+        <label for="texto-inserido">Digite um nome:</label>
         <input type="text" id="texto-inserido" placeholder="Ex: João">
 
         <br><br>
@@ -18,5 +21,7 @@
         <button type="button" onclick="salvarNome()">Salvar nome</button>
         <script src="persistente.js"></script>
     </form>
+    </div>
+    </main>
 </body>
 </html>

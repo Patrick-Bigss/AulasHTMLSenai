@@ -21,8 +21,8 @@ function imprimirNome() {
     );
 
     if (temAcessoRestrito) { /// se (verdadeiro)
-        window.location.href = "pages/gerente.html"
+        window.location.href = "Pages/gerente.html"
     } else {
-        window.location.href = "pages/funcionario.html"
+        window.location.href = "Pages/funcionario.html"
     }
 }
