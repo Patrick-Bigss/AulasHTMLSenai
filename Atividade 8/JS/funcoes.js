@@ -82,40 +82,50 @@ function apagarLocalStorage(){
 
 }
 
-function CalcularImposto(){
+function CalcularImposto() {
 
-            let CalcularImposto = Number(document.getElementById("valorProduto").value);
+    let valor = Number(document.getElementById("valorProduto").value);
 
-            let imposto = 0;
-            let valorFinal = 0;
-            let valor = 0
+    let imposto = 0;
+    let valorFinal = 0;
+
+    // Produto abaixo de 50 dólares
+    if (valor < 50) {
+
+        imposto = valor * 0.20;
+
+    } else {
+
+        // 20% + 90%
+        imposto = (valor * 0.20) + (valor * 0.90);
+
+    }
+
+    valorFinal = valor + imposto;
+
+    document.getElementById("resultado-imposto").innerHTML =
+        "US$ " + valorFinal.toFixed(2);
+
+    window.alert("Valor final: US$ " + valorFinal.toFixed(2));
+
+    salvarHistoricoImposto(valor, imposto, valorFinal);
 }
-            // Produto abaixo de 50 dólares
-            if (valor < 50) {
 
-                imposto = valor * 0.20;
-                valorFinal = valor + imposto;
 
-            }
+   function salvarHistoricoImposto(valor, imposto, valorFinal) {
 
-            // Produto igual ou acima de 50 dólares
-            else {
+    let historicoLocal = JSON.parse(localStorage.getItem("historicoImportacao")) || [];
 
-                imposto = (valor * 0.20) + (valor * 0.90);
-                valorFinal = valor + imposto
-              
-              document.getElementById("resultado").innerHTML = valorFinal
-                "Valor final: US$ " + valorFinal
-            }
+    let operacao = {
+        valor: valor,
+        imposto: imposto,
+        valorFinal: valorFinal
+    };
 
-      window.alert("O resultado é:" + valorFinal);
+    historicoLocal.push(operacao);
 
-      salvarHistoricoConversao(valor, imposto, valorFinal);
-
-      function salvarHistoricoConversao(valor, imposto, valorFinal){
-
-        let Historico= JSON.parse(localStorage.getItem("historicoImportacao")) || [];
-        historicoLocal.push(operacao);
-
-    localStorage.setItem("historicoImportacao", JSON.stringify(historicoLocal));
+    localStorage.setItem(
+        "historicoImportacao",
+        JSON.stringify(historicoLocal)
+    );
 }
